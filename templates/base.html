@@ -10,11 +10,19 @@
 <body>
     <div>
         <header>
+            {% if user.is_authenticated %}
+                <p>Hi {{ user.username }}!</p>
+                <p><a href="{% url 'logout' %}">logout</a></p>
+            {% else %}
+                <p>You are not logged in.</p>
+                <a href="{% url 'login' %}">login</a>
+            {% endif %}
             <div class="nav-left">
                 <h1><a href="{% url 'home' %}">Django blog</a></h1>
             </div>
+
             <div class="nav-right">
-                <button class="btn success"><a href="{% url 'create' %}"> New Blog Post</a></button>                
+                <button class="btn success"><a href="{% url 'create' %}"> New Blog Post</a></button>
             </div>
         </header>
         {% block content %}
